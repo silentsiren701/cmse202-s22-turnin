@@ -178,7 +178,7 @@ class Fermion(ElementaryParticle):
             return True
 
 
-def CompositeParticle(ElementaryParticles):
+def CompositeParticle(ElementaryParticles, Fermion, Boson, CompositeParticle):
     """
     A particle composed of several elementary particles.
 
