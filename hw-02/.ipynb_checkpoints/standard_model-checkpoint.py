@@ -110,3 +110,106 @@ class ElementaryParticle:
         """Move the particle by randomly pushing it in both directions."""
         self.x += np.random.randint(low=-1, high=2)
         self.y += np.random.randint(low=-1, high=2)
+
+
+class Boson(ElementaryParticle):
+    """
+    Boson: elementary particle that obeys Bose-Einstein statistics.
+    This class inherits the ElementaryParticle class with all its attributes and methods.
+    Further attributes and methods are
+
+    Attributes
+    ----------
+    name: str
+        Name of the particle.
+
+    Methods
+    -------
+    check_existence()
+        Checks whether this Boson can exists by calling its parent's method check_type()
+        Raises a ValueError if check_type() returns "fermion"
+
+    """
+    def __init__(self, name, charge, mass, spin):
+        self.name = name
+        super().__init__(charge, mass, spin)
+        self.check_existence()
+    
+    def check_existence(self):
+        if self.check_type() != "boson":
+            raise ValueError
+
+
+class Fermion(ElementaryParticle):
+    """
+    Fermion: elementary particle that obeys Fermi-Dirac statistics.
+    This class inherits the ElementaryParticle class with all its attributes and methods.
+    Further attributes and methods are
+
+    Attributes
+    ----------
+    name: str
+        Name of the particle.
+
+    Methods
+    -------
+    check_existence()
+        Checks whether this Fermion can exists by calling its parent's method check_type()
+        Raises a ValueError if the check_type() returns "boson"
+
+    is_antiparticle(other):
+        Check whether other is the anti-particle of this Fermion 
+        by checking if other is an instance of Fermion first.
+
+    """
+    def __init__(self, name, charge, mass, spin):
+        self.name = name
+        super().__init__(charge, mass, spin)
+        self.check_existence()
+
+    def check_existence(self):
+        if self.check_type() != "fermion":
+            raise ValueError
+    
+    def is_antiparticle(self, other):
+        if (self.charge != -other.charge) or (self.mass != other.mass) or (self.spin != other.spin):
+            return False
+        else:
+            return True
+
+
+def CompositeParticle(ElementaryParticles):
+    """
+    A particle composed of several elementary particles.
+
+    Parameters
+    ----------
+
+    name: str
+        Name of the particle.
+
+    particles : list
+        List of particles objects that compose this particle.
+
+    charge : float
+        Electric charge of the particle.
+
+    mass : float
+        Rest mass in MeV of the particle.
+
+    spin: float
+        Spin of the particle.
+
+    """
+    def __init__(self, name, charge, mass, spin):
+        self.name = name
+        
+        charge, mass, spin = 0, 0, 0 
+        for i in particles:
+            charge += i.charge
+            mass += i.mass
+            spin += i.spin
+        super().__init__(charge, mass, spin)
+
+
+electron.is_antiparticle(positron)
