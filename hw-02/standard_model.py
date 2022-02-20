@@ -178,7 +178,7 @@ class Fermion(ElementaryParticle):
             return True
 
 
-def CompositeParticle(ElementaryParticles, Fermion, Boson, CompositeParticle):
+class CompositeParticle():
     """
     A particle composed of several elementary particles.
 
@@ -201,15 +201,11 @@ def CompositeParticle(ElementaryParticles, Fermion, Boson, CompositeParticle):
         Spin of the particle.
 
     """
-    def __init__(self, name, charge, mass, spin):
+    def __init__(self, name, particles):
         self.name = name
         
-        charge, mass, spin = 0, 0, 0 
+        self.charge, self.mass, self.spin = 0, 0, 0 
         for i in particles:
-            charge += i.charge
-            mass += i.mass
-            spin += i.spin
-        super().__init__(charge, mass, spin)
-
-
-electron.is_antiparticle(positron)
+            self.charge += i.charge
+            self.mass += i.mass
+            self.spin += i.spin
